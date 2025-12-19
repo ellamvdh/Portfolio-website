@@ -1,8 +1,10 @@
+import myPhoto from "./assets/profile2.jpg"; // adjust path if needed
+
 export const siteConfig = {
   name: "Ella Marije van den Hoogenband",
   role: "XR Developer",
-  tagline: "Ik bouw interactieve ganes voor verschillende hardware.",
-  aboutImage: "https://api.dicebear.com/7.x/notionists/png?seed=portfolio",
+  tagline: "Ik bouw interactieve games voor verschillende hardware",
+  aboutImage: myPhoto,
   cv: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
 
   socials: {
