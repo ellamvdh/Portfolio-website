@@ -41,7 +41,7 @@ export default function Contact() {
 
           {/* Social Links */}
           <div className="contact-socials">
-            <h2 className="contact-socials-title">Vind me online</h2>
+            <h2 className="contact-socials-title">Socials</h2>
             {socialLinks.map((social) => (
               <a
                 key={social.name}
