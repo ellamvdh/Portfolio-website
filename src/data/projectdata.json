@@ -39,28 +39,23 @@
     {
       "id": "Ghost Shooter",
       "title": "Ghost Shooter",
-      "tagline": "Een Vr robot disco shooter",
-      "description": "Deze XR escape room is ontwikkeld met Unity's XR Interaction Toolkit en plaatst spelers in een mysterieuze kamer vol interactieve puzzels. Elke puzzel kan op meerdere manieren opgelost worden, wat spelers de vrijheid geeft om creatief te denken.\n\nIk wilde onderzoeken hoe je natuurlijke interacties kunt bouwen met VR controllers waarbij physics-based interactions zorgen voor maximale immersion.\n\nHet project richtte zich op drie kernpijlers: natuurlijke object manipulatie, physics-based puzzels en environmental storytelling waarbij de ruimte zelf het verhaal vertelt.",
+      "tagline": "Een Vr ghost shooter",
+      "description": "Dit project is een vervolg op het cafe spel waarbij je in dus het cafe voor een geest-invasie moest zorgen. Hierbij heb ik voor het eerst gebruikgemaakt van statemachines, coroutines en navmeshagents. Ik vond dit een heel leuk project om te maken!",
       "thumbnail": "GhostShooter.jpg",
       "youtube": "https://www.youtube.com/embed/yNWPdE_39Mo",
-      "screenshots": [
-        "https://picsum.photos/seed/xr1/1200/800",
-        "https://picsum.photos/seed/xr2/1200/800",
-        "https://picsum.photos/seed/xr3/1200/800"
-      ],
       "tags": [
         "Unity",
         "VR",
         "StateMachine"
       ],
-      "projectRole": "XR Interaction Designer",
+      "projectRole": "Gameplay Programmer",
       "timeline": "3 weken",
       "mechanics": [
         {
-          "subtitle": "Grab Interaction",
-          "description": "Objecten worden fysiek opgepakt door middel van XR Grab Interactables waarbij physics properties dynamisch worden aangepast. Voor kleine objecten gebruik ik precision grabs, terwijl grote objecten velocity-based grabs gebruiken die natuurlijker aanvoelen. De throw mechanic tracked controller velocity over meerdere frames voor realistische gooibewegingen.",
-          "image": "https://placehold.co/600x400?text=Grab",
-          "code": "public void OnSelectEntered(SelectEnterEventArgs args)\n{\n    grabbed = true;\n    rb.isKinematic = true;\n}\n\npublic void OnSelectExited(SelectExitEventArgs args)\n{\n    grabbed = false;\n    rb.isKinematic = false;\n}"
+          "subtitle": "Het inspawnen van geesten en ze elke wave sterker maken",
+          "description": "Voor het maken van dit spel moest je gebruik maken van coroutines. Hierdoor kan je yeild return gebruiken om ook met tijd te kunnenn spelen tussen hoevaak je nieuwe geestenn wil inspawnen en hoeveel tijd er is tussen de volgende wave/niveau. Ook wilde ik willekeurige geesten inspawnen op willekeurige locaties doormiddel van de Random.Range() functie. Waar ik achter kwam is dat je nog een vierde parameter kan toevoegen aan een for i statement, ik had namelijk een integer nodig buiten die scope waarbij i kon bijhouden bij welke wave ik was.",
+          "image": "ghost 2.jpg",
+          "code": "IEnumerator SpawnWaves()\n{\n    for (int wave = 1; wave <= totalWaves; wave++, waveCount++) // Go through each wave\n    {\n        // Spawn the enemies for this wave\n        for (int i = 0; i < enemiesPerWave; i++)\n        {\n            SpawnEnemy(); // This spawns one enemy\n            yield return new WaitForSeconds(timeBetweenEnemies); // Wait for 1 second before spawning the next one\n        }\n        //all enemies spawned\n\n        yield return new WaitForSeconds(timeBetweenWaves); // Wait for 5 seconds before starting the next wave\n        //all waves finished\n\n    }\n\n    //all waves complete\n}\n\n// This function actually spawns the enemy at the spawn point\nvoid SpawnEnemy()\n{\n    int ghost = Random.Range(1, 5);\n    //choose which ghost to spawn\n    switch (ghost)\n    {\n        case 1:\n            ChosenGhost = enemyPrefab1;\n            break;\n        case 2:\n            ChosenGhost = enemyPrefab2;\n            break;\n        case 3:\n            ChosenGhost = enemyPrefab3;\n            break;\n        case 4:\n            ChosenGhost = enemyPrefab4;\n            break;\n    }\n\n    int randomLoc = Random.Range(1, 6);\n    Debug.Log(randomLoc);\n    //choose which location to spawn at\n    switch (randomLoc)\n    {\n        case 1:\n            newLoc = loc1;\n            break;\n        case 2:\n            newLoc = loc2;\n            break;\n        case 3:\n            newLoc = loc3;\n            break;\n        case 4:\n            newLoc = loc4;\n            break;\n        case 5:\n            newLoc = loc5;\n            break;\n    }\n\n    if (ChosenGhost != null)\n    {\n        //spawn chosen ghost at the randomly chosen location\n        spawnedGhost = Instantiate(ChosenGhost, newLoc.position, Quaternion.identity);\n    }\n\n    //depending on which wave is the current one, increase the spawned ghost health\n    health increasedHP = spawnedGhost.GetComponentInChildren<health>();\n    increasedHP.maxHealth = 40f + (waveCount - 1) * 20;\n}"
         }
       ],
       "github": "https://github.com/GLU-CSD/vr-store-ellamvdh"
@@ -69,37 +64,33 @@
       "id": "Disco Frenzy",
       "title": "Disco Frenzy",
       "tagline": "Mijn eerste teamproject, een disco shooter.",
-      "description": "Deze topdown shooter begon als een experiment om enemy AI te bouwen en groeide uit tot een complete arcade-style game. Het doel was om tight, responsive controls te combineren met challenging maar faire enemy behaviors.\n\nLater werd het uitgebreid met verschillende enemy types, wave progression systems en satisfying hit-feedback door screen shake en particle effects te combineren.\n\nHet project hielp mij de basis van AI state machines, navmesh pathfinding en difficulty balancing beter te leren begrijpen.",
+      "description": "Ik heb in een project groep een disco shooter met robots gebouwd. Dit spel bestaal uit verschilde kamers met verschillende vijanden die ieder een kans hebben om een pickup te droppen. Het spel eindigt met een gevecht tegen een baas. Dit is het eerste groepsproject waarbij ik met een andere dev en meerdere artists moest samenwerken, een goed leermoment op het gebied van communicatie en samenwerking. ",
       "thumbnail": "Disco frenzy.jpg",
       "youtube": "https://www.youtube.com/embed/EoD_UPaeEVg",
-      "screenshots": [
-        "https://picsum.photos/seed/shooter1/1200/800",
-        "https://picsum.photos/seed/shooter2/1200/800"
-      ],
       
       
       "tags": [
         "Unity",
         "VR",
-        "Teamproject"
+        "Teamproject",
+        "Trello Manger"
       ],
       "projectRole": "Programmer",
       "timeline": "1 week",
       "mechanics": [
         {
-          "subtitle": "Enemy AI State Machine",
-          "description": "Een finite state machine voor vijanden die dynamisch schakelt tussen Idle → Chase → Attack → Retreat states. In Chase gebruiken enemies navmesh pathfinding, in Attack positioneren ze zich tactisch, en in Retreat trekken ze zich terug naar cover bij lage health. Verschillende enemy types hebben eigen parameters voor aggression range en attack patterns.",
-          "image": "https://placehold.co/600x400?text=Enemy+AI",
-          "code": "void Update()\n{\n    switch(state)\n    {\n        case Idle:\n            LookForPlayer();\n            break;\n\n        case Chase:\n            MoveTowardPlayer();\n            break;\n\n        case Attack:\n            TryShoot();\n            break;\n    }\n}"
+          "subtitle": "Haptic Feedback",
+          "description": "TIjdens dit project heb ik veel in de unity editor gewerkt en zocht ik naar een uitdaging. Ik heb daarom haptic feedback toegevoed aan het spel. Het lopen simuleren vond ik het lastigste gezien het niet direct stopte en ik niet precies wist hoe ik moest kijken of de speler wel of niet bewoog. uiteindelijk is dit wel gelukt. Ik heb ook haptic feedback voor bijvoorbeeld het zwaard, pisolen, in je zak doen van objecten en geraakt worden gesiimuleerd.",
+          "image":"haptic.jpg",
+          "code": "private void Update()\n{\n    timer += Time.deltaTime;\n    if (WalkEnabled == true)\n    {\n        //keep playing the walking feeling when player is walking\n        if (isWalkingHaptic == false)\n        {\n            //play walking feeling when walking\n            BhapticsLibrary.Play(BhapticsEvent.SHORTWALK);\n            isWalkingHaptic = true;\n            timer = 0f;\n        }\n\n        if (isWalkingHaptic == true && timer > 0.6f)\n        {\n            //if the walking feeling has stopped but the player is still moving in game\n            //stop the walking haptic bool so that the walking feeling can be played again\n            isWalkingHaptic = false;\n        }\n    }\n    if (WalkEnabled == false)\n    {\n        //stop the walking feeling if the player suddenly stops moving\n        BhapticsLibrary.StopByEventId(\"WALKING\");\n    }\n}\n\nprivate void actionPerformed(InputAction.CallbackContext context)\n{\n    Vector2 input = context.ReadValue<Vector2>();\n    \n    //check the stick movement\n    //depending on that decide if player is walking or not\n    if (input.magnitude < 0.9f)\n    {\n        //not walking\n        WalkEnabled = false;\n    }\n    else if (input.magnitude > 0.9f)\n    {\n        //player is walking\n        WalkEnabled = true;\n    }\n}"
         },
         {
           "subtitle": "Projectile System",
-          "description": "Hit-detection via raycasts met instant feedback - veel sneller en accurater dan physics-based projectiles. De raycast spawned een hit effect op het impact point en gebruikt layer masks om te bepalen wat geraakt kan worden. Elk schot krijgt een tracer effect die de bullet path visualiseert.",
-          "image": "https://placehold.co/600x400?text=Projectile",
-          "code": "void Shoot()\n{\n    Ray ray = new Ray(transform.position, transform.forward);\n\n    if (Physics.Raycast(ray, out var hit, 50f))\n    {\n        Debug.Log($\"Hit {hit.collider.name}\");\n    }\n}"
-        }
+          "description": "",
+          "image": "disco shooter.jpg",
+          "code": "protected override void Update()\n{\n    speed = 2f;\n    \n    if (projectilesTransform != null)\n    {\n        //check if the tray frisbee is already arrived back at its spawn location and then despawn it\n        if (movingBack == true && transform.position == projectilesTransform.position)\n        {\n            Destroy(this.gameObject, 0.5f);\n        }\n        //if the tray frisbee has reached the old marked position of the player move it back\n        if ((Tray.transform.position == oldPlayerTransform && movingBack == false) || movingBack == true)\n        {\n            movingBack = true;\n            Tray.transform.position = Vector3.MoveTowards(Tray.transform.position, projectilesTransform.transform.position, speed * Time.deltaTime);\n        }\n        //otherwise move the tray frisbee towards the old player transform\n        else\n        {\n            Tray.transform.position = Vector3.MoveTowards(Tray.transform.position, oldPlayerTransform, speed * Time.deltaTime);\n        }\n    }\n}"
+        }        
       ],
-      "git": "https://github.com/fvugt/asteroids-3d",
       "itch": "https://nthans.itch.io/disco-frenzy"
     },
     {
@@ -137,7 +128,7 @@
       "id": "Porting",
       "title": "Porting",
       "tagline": "Leren porten naar verschillende platforms.",
-      "description": "Deze topdown shooter begon als een experiment om enemy AI te bouwen en groeide uit tot een complete arcade-style game. Het doel was om tight, responsive controls te combineren met challenging maar faire enemy behaviors.\n\nLater werd het uitgebreid met verschillende enemy types, wave progression systems en satisfying hit-feedback door screen shake en particle effects te combineren.\n\nHet project hielp mij de basis van AI state machines, navmesh pathfinding en difficulty balancing beter te leren begrijpen.",
+      "description":"Doormiddel van het porten van dit spel naar verschillende platformen heb ik veel geleerd over porten. Zo heb ik ook mijn controls versimpeld doormiddel van het nieuwe unity input systeem. In mijn platformer heb ik ook een baas gemaakt waar ik heel trots op ben, met meerde fases.",
       "thumbnail": "Replay Platformer2.jpg",
       "youtube": "https://www.youtube.com/embed/bU1uGO0hbDE",
       "screenshots": [
@@ -153,7 +144,7 @@
         "Platformer"
       ],
       "projectRole": "Programmer",
-      "timeline": "1 week",
+      "timeline": "6 weken",
       "mechanics": [
         {
           "subtitle": "Enemy AI State Machine",
