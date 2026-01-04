@@ -15,15 +15,13 @@ export const siteConfig = {
   },
 
   aboutLong: `
-    Ik ben een gedreven en creatieve developer met een passie voor technologie en games. Momenteel studeer ik XR Development, waar ik leer games en applicaties te bouwen voor verschillende platforms, waaronder VR-brillen, Steam Deck, mobiele apparaten, web en Windows.
+Ik ben Ella van den Hoogenband en ik ben een gepasioneerde developer. Momenteel studeer ik XR-developemt waar ik games leer bouwen voor verschillende hardware zoals VR-brillen, Steam Deck, mobiele aparaten, web en windows. 
 
-Tijdens mijn studie ontwikkel ik interactieve en toegankelijke ervaringen en werk ik met verschillende programmeertalen en tools. Ik geniet ervan om creatieve en innovatieve oplossingen te bedenken voor complexe problemen en ideeën om te zetten in werkende prototypes.
 
-Naast mijn studie heb ik praktische ervaring opgedaan door te werken in teamverband, waarbij ik verantwoordelijkheden draag en leer efficiënt samen te werken en te communiceren. Mijn focus ligt op het continu verbeteren van mijn vaardigheden, het realiseren van projecten van concept tot oplevering en het creëren van gebruiksvriendelijke en innovatieve applicaties.
+Tijdens mijn studie heb ik verschillende vaardigheden ontwikkeld zoals het leren werken in een teamverband, de basis van een game eninge en hoe ik snel nieuwe programeer talen kan leren ontcijferen.
 
-Ik ben leergierig, oplossingsgericht en ambitieus, en streef ernaar impact te maken in de wereld van XR Development en gameontwikkeling.
+Ik ben leergierig, oplossingsgericht en ambitieus.
   `,
-
   softSkills: ["Samenwerken met artists", "Feedback geven & ontvangen", "Creatief en probleemoplossend", "Communicatief sterk", "Hoog doorzettingsvermogen", ],
 
   hardSkills: ["Unity & XR Interaction Toolkit", "C#, C++, Javascript", "VR development, hardware-integratie","Cross-platform development","Prototyping, debugging, testen", "Git & Version Control"],
