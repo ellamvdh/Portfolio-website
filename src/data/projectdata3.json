@@ -1,73 +1,7 @@
 {
   "projects": [
     
-    {
-      "id": "c++",
-      "title": "C++ turn based strategy",
-      "tagline": "Klein console vecht spel",
-      "description": "",
-      "thumbnail": "cpp.jpg",
-      
-      
-      
-      "tags": [
-        "C++",
-        "cxxdroid",
-        "Console Game"
-      ],
-      "projectRole": "Programmer",
-      "timeline": "1 week",
-      "mechanics": [
-        {
-          "subtitle": "Enemy AI State Machine",
-          "description": "Een finite state machine voor vijanden die dynamisch schakelt tussen Idle → Chase → Attack → Retreat states. In Chase gebruiken enemies navmesh pathfinding, in Attack positioneren ze zich tactisch, en in Retreat trekken ze zich terug naar cover bij lage health. Verschillende enemy types hebben eigen parameters voor aggression range en attack patterns.",
-          "image": "PixelHeroes.jpg",
-          "code": "void Update()\n{\n    switch(state)\n    {\n        case Idle:\n            LookForPlayer();\n            break;\n\n        case Chase:\n            MoveTowardPlayer();\n            break;\n\n        case Attack:\n            TryShoot();\n            break;\n    }\n}"
-        },
-        {
-          "subtitle": "Projectile System",
-          "description": "Hit-detection via raycasts met instant feedback - veel sneller en accurater dan physics-based projectiles. De raycast spawned een hit effect op het impact point en gebruikt layer masks om te bepalen wat geraakt kan worden. Elk schot krijgt een tracer effect die de bullet path visualiseert.",
-          "image": "bosscpp.jpg",
-          "code": "void Shoot()\n{\n    Ray ray = new Ray(transform.position, transform.forward);\n\n    if (Physics.Raycast(ray, out var hit, 50f))\n    {\n        Debug.Log($\"Hit {hit.collider.name}\");\n    }\n}"
-        }
-      ]
-    },
-    {
-      "id": "Save Christmas",
-      "title": "Save Christmas",
-      "tagline": "Kort Spel waar je kerst moet redden",
-      "description": "Deze VR training simulator is gebouwd voor het oefenen van complexe industriële procedures in een volledig veilige virtuele omgeving. Het doel was om een training te creëren die net zo effectief is als hands-on training, maar zonder de risico's en kosten.\n\nDe focus lag op realistische hand-tracking voor natuurlijke interacties, stapsgewijze instructies die gebruikers begeleiden en gedetailleerde feedback op gebruikersacties waarbij immediate feedback het leerproces versterkt.\n\nHet project leerde mij hoe je effectieve VR training ervaringen ontwerpt met verschillende difficulty modes en performance tracking om daadwerkelijk kennisoverdracht te bevorderen.",
-      "thumbnail": "save christmas.jpg",
-      "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      "screenshots": [
-        "https://picsum.photos/seed/vrt1/1200/800",
-        "https://picsum.photos/seed/vrt2/1200/800",
-        "https://picsum.photos/seed/vrt3/1200/800"
-      ],
-      "tags": [
-        "Godot",
-        "GDscript",
-        "2D"
-      ],
-      "projectRole": "VR Developer",
-      "timeline": "4 weken",
-      "mechanics": [
-        {
-          "subtitle": "Step-by-Step Guide System",
-          "description": "Een dynamisch instructiesysteem dat de gebruiker door complexe multi-step procedures leidt met real-time visual guidance. Elke step heeft validation criteria die checken of de actie correct is uitgevoerd. In guided mode krijg je hints als je te lang stilstaat, terwijl advanced mode minimale assists heeft voor realistischere training.",
-          "image": "https://placehold.co/600x400?text=Guide+System",
-          "code": "public class StepGuide : MonoBehaviour\n{\n    public List<TrainingStep> steps;\n    private int currentStep = 0;\n\n    void CheckStepCompletion()\n    {\n        if (steps[currentStep].IsCompleted())\n        {\n            currentStep++;\n            ShowNextInstruction();\n        }\n    }\n}"
-        },
-        {
-          "subtitle": "Hand Tracking Validation",
-          "description": "Controleert of handposities en hand poses correct zijn voor specifieke acties door palm orientation en finger positions te valideren. Wanneer je grip incorrect is, verschijnt een ghost hand overlay die de correcte positie toont. Dit is veel effectiever dan tekstuele instructies omdat mensen de juiste pose kunnen imiteren.",
-          "image": "https://placehold.co/600x400?text=Hand+Tracking",
-          "code": "bool ValidateHandPose(HandPose required)\n{\n    float similarity = Vector3.Dot(\n        currentPose.palmNormal,\n        required.palmNormal\n    );\n\n    return similarity > 0.95f;\n}"
-        }
-      ],
-      "git": "https://github.com/fvugt/vr-training-sim",
-      "itch": ""
-    }
+    
     
   ]
 }

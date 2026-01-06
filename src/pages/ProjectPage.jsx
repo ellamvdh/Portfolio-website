@@ -1,7 +1,5 @@
 import { useParams } from "react-router-dom";
 import projectData from "../data/projectdata.json";
-import projectData2 from "../data/projectdata2.json";
-import projectData3 from "../data/projectdata3.json";
 
 import ProjectHeader from "../components/projects/ProjectHeader";
 import ProjectInfo from "../components/projects/ProjectInfo";
@@ -12,16 +10,11 @@ import ProjectPrevNext from "../components/projects/ProjectPrevNext";
 export default function ProjectPage() {
   const { projectId } = useParams();
 
-  const allProjects = [
-    ...projectData.projects,
-    ...projectData2.projects,
-    ...projectData3.projects,
+  // Only one project data source
+  const allProjects = projectData.projects;
 
-  ];
-
-  const project = allProjects.find(
-    p => String(p.id) === projectId
-  );
+  // Find clicked project
+  const project = allProjects.find(p => p.id === projectId);
 
   if (!project) {
     return (
@@ -31,24 +24,19 @@ export default function ProjectPage() {
     );
   }
 
-  const currentIndex = allProjects.findIndex(
-    p => String(p.id) === projectId
-  );
-
-  const previousIndex =
-    currentIndex > 0 ? currentIndex - 1 : allProjects.length - 1;
-
-  const nextIndex =
-    currentIndex < allProjects.length - 1 ? currentIndex + 1 : 0;
+  // Previous & next projects (looping)
+  const currentIndex = allProjects.findIndex(p => p.id === projectId);
+  const previousIndex = currentIndex > 0 ? currentIndex - 1 : allProjects.length - 1;
+  const nextIndex = currentIndex < allProjects.length - 1 ? currentIndex + 1 : 0;
 
   const previousProject = {
     title: allProjects[previousIndex].title,
-    url: `/projects/${allProjects[previousIndex].id}`,
+    url: `/projects/${allProjects[previousIndex].id}`
   };
 
   const nextProject = {
     title: allProjects[nextIndex].title,
-    url: `/projects/${allProjects[nextIndex].id}`,
+    url: `/projects/${allProjects[nextIndex].id}`
   };
 
   return (
