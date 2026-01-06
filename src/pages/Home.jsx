@@ -1,10 +1,14 @@
 import { siteConfig } from "../siteConfig";
 import ProjectCard from "../components/ProjectCard";
 import projectData from "../data/projectdata.json";
+import projectData2 from "../data/projectdata2.json";
+import projectData3 from "../data/projectdata3.json";
 
 export default function Home() {
   // Haal projects array uit de JSON
   const projects = projectData.projects; 
+  const projects2 = projectData2.projects
+  const projects3 = projectData3.projects
   return (
     <div>
       {/* Hero Section */}
@@ -46,13 +50,27 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       <section className="projects-section">
         <div className="projects-container">
           <h2 className="projects-title">Mijn Projecten</h2>
 
           {/* Grid with ProjectCards */}
           <div className="projects-grid">
-            {projects.map((project) => (
+            {projects2.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="projects-section">
+        <div className="projects-container">
+          <h2 className="projects-title">Mijn Projecten</h2>
+
+          {/* Grid with ProjectCards */}
+          <div className="projects-grid">
+            {projects3.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
           </div>
