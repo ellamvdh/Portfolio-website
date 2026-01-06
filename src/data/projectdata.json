@@ -1,166 +1,5 @@
 {
   "projects": [
-   
-    {
-      "id": "Cafe Game",
-      "title": "Cafe Game",
-      "tagline": "Een simpel Vr cafe spel.",
-      "description":"We moesten dit project een Vr Supermarkt bouwen doormiddel van probuilden en die dan simuleren in VR. Zelf voelde ik niks voor een supermarkt bouwen dus ben ik gaan kijken of een cafe ook mocht zolang het dezelfde elemente had, dit mocht. In dit Cafe heb ik vele elementen toegevoegd zoals betaalbaar eten, een alarm systeem voor als je steelt, speelbare instumenten en natuurlijk een cafe mini game, waar ik het meest trots op ben! ",
-      "thumbnail": "Cafe Game.jpg",
-      "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      "screenshots": [
-        "Cafe Game.jpg",
-        "cafe 1.jpg"
-      ],
-      "tags": [
-        "Unity",
-        "VR",
-        "ProBuilder"
-      ],
-      "projectRole": "Gameplay Programmer",
-      "timeline": "3 weken",
-      "mechanics": [
-        {
-          "subtitle": "Random eten en klant slector",
-          "description": "Dit script gebuik ik om steeds nieuwe klanten en het eten dat ze willen willekeurig ui te laten kiezen. Als de tijd verlopen of als je het juiste eten aan de klant hebt gegeven gaat het spel door naar de volgende klant. ",
-          "image": "Cafe Game.jpg",
-          "code": "void Update()\n{\n    if (timer >= timeForCustomers || givefoodtocustomers.GoToNextCustomer == true)\n    {\n        //make sure the customers dont keep switching\n        givefoodtocustomers.GoToNextCustomer = false;\n        timer = 0f;\n\n        // Deactivate the previous customer before choosing a new one\n        CHOSENcustomer.SetActive(false);\n\n        // Randomly choose a meal and customer\n        randomMeel = Random.Range(1, 7); // Between 1 and 6\n        randomCustomer = Random.Range(1, 8); // Between 1 and 7 (you have 7 customers)\n\n        // Select the customer based on randomCustomer value\n        switch (randomCustomer)\n        {\n            case 1:\n                CHOSENcustomer = Customer1;\n                break;\n            case 2:\n                CHOSENcustomer = Customer2;\n                break;\n            case 3:\n                CHOSENcustomer = Customer3;\n                break;\n            case 4:\n                CHOSENcustomer = Customer4;\n                break;\n            case 5:\n                CHOSENcustomer = Customer5;\n                break;\n            case 6:\n                CHOSENcustomer = Customer6;\n                break;\n            case 7:\n                CHOSENcustomer = Customer7;\n                break;\n\n            default:\n                Debug.Log(\"Random customer was out of bounds\");\n                break;\n        }\n\n        // Handle meal logic\n        switch (randomMeel)\n        {\n            case 1:\n                // cake\n                CHOSenMeal = 1;\n                mealText.text = \"Ik wil een taart!\";\n                break;\n            case 2:\n                // sandwich\n                CHOSenMeal = 2;\n                mealText.text = \"Ik wil een broodje...\";\n                break;\n            case 3:\n                // bagel\n                CHOSenMeal= 3;\n                mealText.text = \"Mag ik een bagel?\";\n                break;\n            case 4:\n                // drink 1\n                CHOSenMeal = 4;\n                mealText.text = \"Drankje 1 alsjeblieft!\";\n                break;\n            case 5:\n                // drink 2\n                CHOSenMeal = 5;\n                mealText.text = \"HMMM, drankje 2 ziet er wel goed uit.\";\n                break;\n            case 6:\n                // drink 3\n                CHOSenMeal = 6;\n                mealText.text = \"Zou ik drankje 3 mogen proberen?\";\n                break;\n            default:\n                Debug.Log(\"Random meal was out of bounds\");\n                break;\n        }\n\n        // Activate the newly selected customer\n        CHOSENcustomer.SetActive(true);\n    }\n}"
-        },
-        {
-          "subtitle": "Eten inspawnen bij juiste combinatie van ingredienten",
-          "description": "Om het spel te spelen moet je doormiddel van het combineren van de juiste ingredienten eten laten ontstaan. In dit script check ik welke ingredienten op welk bord ligt en afhankelijk daarvan zorg ik dat het juiste product wordt ingespawned.",
-          "image": "cafe 3.jpg",
-          "code": "private void Update()\n{\n    //check if the plates hold certain items and if the do instantiate the correct food\n    if(plate1.HeldItem.tag == \"butter\" && plate2.HeldItem.tag == \"sugar\" && plate3.HeldItem.tag == \"egg\" && plate4.HeldItem.tag == \"flour\")\n    {\n        SpawnFood(cake);\n    }\n\n    if (plate1.HeldItem.tag == \"ham\" && plate2.HeldItem.tag == \"cheese\" && plate3.HeldItem.tag == \"sla\" && plate4.HeldItem.tag == \"bread\")\n    {\n        SpawnFood(sandwich);\n    }\n\n    if (plate1.HeldItem.tag == \"bagel\" && plate2.HeldItem.tag == \"cheese\" && plate3.HeldItem.tag == \"sla\" && plate4.HeldItem.tag == \"tomato\")\n    {\n        SpawnFood(bagel);\n    }\n}\n\nprivate void SpawnFood(GameObject foodOBJ)\n{\n    //delete items on plates when food is spawned\n    Destroy(plate1.HeldItem.gameObject);\n    Destroy(plate2.HeldItem.gameObject);\n    Destroy(plate3.HeldItem.gameObject);\n    Destroy(plate4.HeldItem.gameObject);\n\n    //make sure they are deleted\n    plate1.HeldItem = null;\n    plate2.HeldItem = null;\n    plate3.HeldItem = null;\n    plate4.HeldItem = null;\n\n    //spawn the food\n    Instantiate(foodOBJ, foodTransform.position, foodTransform.rotation);\n}"        }        
-      ],
-      "github": "https://github.com/GLU-CSD/vr-store-ellamvdh"
-      
-      
-    },
-    {
-      "id": "Ghost Shooter",
-      "title": "Ghost Shooter",
-      "tagline": "Een Vr ghost shooter",
-      "description": "Dit project is een vervolg op het cafe spel waarbij je in dus het cafe voor een geest-invasie moest zorgen. Hierbij heb ik voor het eerst gebruikgemaakt van statemachines, coroutines en navmeshagents. Ik vond dit een heel leuk project om te maken!",
-      "thumbnail": "GhostShooter.jpg",
-      "youtube": "https://www.youtube.com/embed/yNWPdE_39Mo",
-      "tags": [
-        "Unity",
-        "VR",
-        "StateMachine"
-      ],
-      "projectRole": "Gameplay Programmer",
-      "timeline": "3 weken",
-      "mechanics": [
-        {
-          "subtitle": "Het inspawnen van geesten en ze elke wave sterker maken",
-          "description": "Voor het maken van dit spel moest je gebruik maken van coroutines. Hierdoor kan je yeild return gebruiken om ook met tijd te kunnenn spelen tussen hoevaak je nieuwe geestenn wil inspawnen en hoeveel tijd er is tussen de volgende wave/niveau. Ook wilde ik willekeurige geesten inspawnen op willekeurige locaties doormiddel van de Random.Range() functie. Waar ik achter kwam is dat je nog een vierde parameter kan toevoegen aan een for i statement, ik had namelijk een integer nodig buiten die scope waarbij i kon bijhouden bij welke wave ik was.",
-          "image": "ghost 2.jpg",
-          "code": "IEnumerator SpawnWaves()\n{\n    for (int wave = 1; wave <= totalWaves; wave++, waveCount++) // Go through each wave\n    {\n        // Spawn the enemies for this wave\n        for (int i = 0; i < enemiesPerWave; i++)\n        {\n            SpawnEnemy(); // This spawns one enemy\n            yield return new WaitForSeconds(timeBetweenEnemies); // Wait for 1 second before spawning the next one\n        }\n        //all enemies spawned\n\n        yield return new WaitForSeconds(timeBetweenWaves); // Wait for 5 seconds before starting the next wave\n        //all waves finished\n\n    }\n\n    //all waves complete\n}\n\n// This function actually spawns the enemy at the spawn point\nvoid SpawnEnemy()\n{\n    int ghost = Random.Range(1, 5);\n    //choose which ghost to spawn\n    switch (ghost)\n    {\n        case 1:\n            ChosenGhost = enemyPrefab1;\n            break;\n        case 2:\n            ChosenGhost = enemyPrefab2;\n            break;\n        case 3:\n            ChosenGhost = enemyPrefab3;\n            break;\n        case 4:\n            ChosenGhost = enemyPrefab4;\n            break;\n    }\n\n    int randomLoc = Random.Range(1, 6);\n    Debug.Log(randomLoc);\n    //choose which location to spawn at\n    switch (randomLoc)\n    {\n        case 1:\n            newLoc = loc1;\n            break;\n        case 2:\n            newLoc = loc2;\n            break;\n        case 3:\n            newLoc = loc3;\n            break;\n        case 4:\n            newLoc = loc4;\n            break;\n        case 5:\n            newLoc = loc5;\n            break;\n    }\n\n    if (ChosenGhost != null)\n    {\n        //spawn chosen ghost at the randomly chosen location\n        spawnedGhost = Instantiate(ChosenGhost, newLoc.position, Quaternion.identity);\n    }\n\n    //depending on which wave is the current one, increase the spawned ghost health\n    health increasedHP = spawnedGhost.GetComponentInChildren<health>();\n    increasedHP.maxHealth = 40f + (waveCount - 1) * 20;\n}"
-        }
-      ],
-      "github": "https://github.com/GLU-CSD/vr-store-ellamvdh"
-    },
-    {
-      "id": "Disco Frenzy",
-      "title": "Disco Frenzy",
-      "tagline": "Mijn eerste teamproject, een disco shooter.",
-      "description": "Ik heb in een project groep een disco shooter met robots gebouwd. Dit spel bestaal uit verschilde kamers met verschillende vijanden die ieder een kans hebben om een pickup te droppen. Het spel eindigt met een gevecht tegen een baas. Dit is het eerste groepsproject waarbij ik met een andere dev en meerdere artists moest samenwerken, een goed leermoment op het gebied van communicatie en samenwerking. ",
-      "thumbnail": "Disco frenzy.jpg",
-      "youtube": "https://www.youtube.com/embed/EoD_UPaeEVg",
-      
-      
-      "tags": [
-        "Unity",
-        "VR",
-        "Teamproject",
-        "Trello Manger"
-      ],
-      "projectRole": "Programmer",
-      "timeline": "1 week",
-      "mechanics": [
-        {
-          "subtitle": "Haptic Feedback",
-          "description": "TIjdens dit project heb ik veel in de unity editor gewerkt en zocht ik naar een uitdaging. Ik heb daarom haptic feedback toegevoed aan het spel. Het lopen simuleren vond ik het lastigste gezien het niet direct stopte en ik niet precies wist hoe ik moest kijken of de speler wel of niet bewoog. uiteindelijk is dit wel gelukt. Ik heb ook haptic feedback voor bijvoorbeeld het zwaard, pisolen, in je zak doen van objecten en geraakt worden gesiimuleerd.",
-          "image":"haptic.jpg",
-          "code": "private void Update()\n{\n    timer += Time.deltaTime;\n    if (WalkEnabled == true)\n    {\n        //keep playing the walking feeling when player is walking\n        if (isWalkingHaptic == false)\n        {\n            //play walking feeling when walking\n            BhapticsLibrary.Play(BhapticsEvent.SHORTWALK);\n            isWalkingHaptic = true;\n            timer = 0f;\n        }\n\n        if (isWalkingHaptic == true && timer > 0.6f)\n        {\n            //if the walking feeling has stopped but the player is still moving in game\n            //stop the walking haptic bool so that the walking feeling can be played again\n            isWalkingHaptic = false;\n        }\n    }\n    if (WalkEnabled == false)\n    {\n        //stop the walking feeling if the player suddenly stops moving\n        BhapticsLibrary.StopByEventId(\"WALKING\");\n    }\n}\n\nprivate void actionPerformed(InputAction.CallbackContext context)\n{\n    Vector2 input = context.ReadValue<Vector2>();\n    \n    //check the stick movement\n    //depending on that decide if player is walking or not\n    if (input.magnitude < 0.9f)\n    {\n        //not walking\n        WalkEnabled = false;\n    }\n    else if (input.magnitude > 0.9f)\n    {\n        //player is walking\n        WalkEnabled = true;\n    }\n}"
-        },
-        {
-          "subtitle": "Projectile System",
-          "description": "",
-          "image": "disco shooter.jpg",
-          "code": "protected override void Update()\n{\n    speed = 2f;\n    \n    if (projectilesTransform != null)\n    {\n        //check if the tray frisbee is already arrived back at its spawn location and then despawn it\n        if (movingBack == true && transform.position == projectilesTransform.position)\n        {\n            Destroy(this.gameObject, 0.5f);\n        }\n        //if the tray frisbee has reached the old marked position of the player move it back\n        if ((Tray.transform.position == oldPlayerTransform && movingBack == false) || movingBack == true)\n        {\n            movingBack = true;\n            Tray.transform.position = Vector3.MoveTowards(Tray.transform.position, projectilesTransform.transform.position, speed * Time.deltaTime);\n        }\n        //otherwise move the tray frisbee towards the old player transform\n        else\n        {\n            Tray.transform.position = Vector3.MoveTowards(Tray.transform.position, oldPlayerTransform, speed * Time.deltaTime);\n        }\n    }\n}"
-        }        
-      ],
-      "itch": "https://nthans.itch.io/disco-frenzy"
-    },
-    {
-      "id": "c++",
-      "title": "C++ turn based strategy",
-      "tagline": "Klein console vecht spel",
-      "description": "",
-      "thumbnail": "cpp.jpg",
-      
-      
-      
-      "tags": [
-        "C++",
-        "cxxdroid",
-        "Console Game"
-      ],
-      "projectRole": "Programmer",
-      "timeline": "1 week",
-      "mechanics": [
-        {
-          "subtitle": "Enemy AI State Machine",
-          "description": "Een finite state machine voor vijanden die dynamisch schakelt tussen Idle → Chase → Attack → Retreat states. In Chase gebruiken enemies navmesh pathfinding, in Attack positioneren ze zich tactisch, en in Retreat trekken ze zich terug naar cover bij lage health. Verschillende enemy types hebben eigen parameters voor aggression range en attack patterns.",
-          "image": "PixelHeroes.jpg",
-          "code": "void Update()\n{\n    switch(state)\n    {\n        case Idle:\n            LookForPlayer();\n            break;\n\n        case Chase:\n            MoveTowardPlayer();\n            break;\n\n        case Attack:\n            TryShoot();\n            break;\n    }\n}"
-        },
-        {
-          "subtitle": "Projectile System",
-          "description": "Hit-detection via raycasts met instant feedback - veel sneller en accurater dan physics-based projectiles. De raycast spawned een hit effect op het impact point en gebruikt layer masks om te bepalen wat geraakt kan worden. Elk schot krijgt een tracer effect die de bullet path visualiseert.",
-          "image": "bosscpp.jpg",
-          "code": "void Shoot()\n{\n    Ray ray = new Ray(transform.position, transform.forward);\n\n    if (Physics.Raycast(ray, out var hit, 50f))\n    {\n        Debug.Log($\"Hit {hit.collider.name}\");\n    }\n}"
-        }
-      ]
-    },
-    {
-      "id": "Replay Platformer",
-      "title": "Replay Platformer",
-      "tagline": "Leren porten naar verschillende platforms.",
-      "description":"Doormiddel van het porten van dit spel naar verschillende platformen heb ik veel geleerd over porten. Zo heb ik ook mijn controls versimpeld doormiddel van het nieuwe unity input systeem. In mijn platformer heb ik ook een baas gemaakt waar ik heel trots op ben, met meerde fases.",
-      "thumbnail": "Replay Platformer2.jpg",
-      "youtube": "https://www.youtube.com/embed/bU1uGO0hbDE",
-      "screenshots": [
-        "https://picsum.photos/seed/shooter1/1200/800",
-        "https://picsum.photos/seed/shooter2/1200/800"
-      ],
-      
-      
-      "tags": [
-        "Unity",
-        "Porten",
-        "New Unity Input System",
-        "Platformer"
-      ],
-      "projectRole": "Programmer",
-      "timeline": "6 weken",
-      "mechanics": [
-        {
-          "subtitle": "Grote Baas",
-          "description":"Als mijn grote baas voor dit spel wilde ik iets speciaals bouwen, een baas met drie fases. In de eerste fase gooit hij stenen op jou af, in de tweede fase krijgt hij een schild die je doormiddel van wortelen die hij inspawnt kan slopen en als laatste verdediging stuurt de baas zijn minions.",
-          "image": "bunny.jpg",
-          "code": "private void OnTriggerEnter(Collider other)\n{\n    // Start boss fight upon contact with player\n    if (!_bossFightStarted && other.gameObject.name == \"Player\")\n    {\n        _bossFightStarted = true;\n        _healthbarUI.SetActive(true);\n        _bunnyAnimator.SetBool(\"waiting\", false);\n\n        Debug.Log(\"Start Boss Coroutine\");\n        StartCoroutine(ThrowRocks());\n    }\n}\n\nprivate void HandlePhases()\n{\n    // === Phase 2 ===\n    // In phase 2, the shield is activated and the carrots appear\n    // You need to destroy the carrots to make the shield disappear\n    if (CurrentHealth == 50f && !Fase2 && !Fase3)\n    {\n        Fase2 = true;\n        _shield.SetActive(true);\n\n        foreach (GameObject carrot in _carrots)\n        {\n            carrot.SetActive(true);\n        }\n    }\n\n    // === Transition to Phase 3 ===\n    // Once all carrots are destroyed, move to phase 3\n    if (!Fase3 && _grapplingScript.DestroyedCarrots == 6)\n    {\n        Destroy(_shield);\n        CurrentHealth = 30f;\n        Fase3 = true;\n    }\n\n    // === Phase 3 Logic ===\n    // In phase 3, the boss throws minions as the last attack every few seconds\n    if (Fase3 && !_minionsSpawned)\n    {\n        Debug.Log(\"Starting the last Phase and sending minions!\");\n        _minionsSpawned = true;\n        StartCoroutine(SpawnMinions());\n    }\n}\n\n#region Coroutines\nprivate IEnumerator ThrowRocks()\n{\n    // Keep throwing rocks as long as health is above 50%\n    while (CurrentHealth > 50f)\n    {\n        Debug.Log(\"Throw rocks\");\n        Instantiate(_rockPrefab, _rockSpawnPoint.position, _rockSpawnPoint.rotation);\n        yield return new WaitForSeconds(1f);\n    }\n}\n\nprivate IEnumerator SpawnMinions()\n{\n    // Spawn minions as long as the boss is alive\n    while (CurrentHealth > 0f)\n    {\n        Instantiate(_minionPrefab, _rockSpawnPoint.position, _rockSpawnPoint.rotation);\n        Debug.Log(\"Minion spawned!\");\n        yield return new WaitForSeconds(2f);\n    }\n}\n#endregion"
-        },
-        {
-          "subtitle": "Grappeling Mechaniek",
-          "description": "Ik heb ook een grappeling mechaniek gebouwd. Deze mechaniek helpt de speler intaracteren met de wereld, je kunt grote sprongen maken en soms zelfs dingen slopen hieermee! ",
-          "image": "Grappeling.jpg",
-          "code": "private void StartGrapple()\n{\n    //check if you can grapple\n    if (_grappleCooldownTimer > 0f) return;\n\n    _isGrappling = true;\n    //freeze the player so it doesn't cause any problems while grappling\n    _characterMovement.currentState = CharacterMovement.PlayerState.Freeze;\n\n    //draw a raycast to where you want to grapple\n    RaycastHit hit;\n    if (Physics.Raycast(_camera.position, _camera.forward, out hit, _maxGrappleDistance, _whatIsGrabbable))\n    {\n        _grapplePoint = hit.point;\n        //dont allow to grapple the rock or boss\n        if (hit.collider.CompareTag(\"rock\"))\n        {\n            Invoke(nameof(StopGrapple), _grappleDelay);\n        }\n        else if (hit.collider.name == \"Boss\")\n        {\n            if (!_didBossDamage)\n            {\n                float damage = BossScript.CurrentHealth > 30f ? 5f : 1f;\n                BossScript.CurrentHealth -= damage;\n                _didBossDamage = true;\n                BossExplode.Play();\n            }\n            Invoke(nameof(StopGrapple), _grappleDelay);\n        }\n        //destroy the boss carrot if you hit it\n        else if (hit.collider.CompareTag(\"carrot\"))\n        {\n            HandleCarrot(hit);\n            Invoke(nameof(StopGrapple), _grappleDelay);\n        }\n        //if you hit an object you can actually grapple, then grapple movement = true\n        else\n        {\n            _grappleMovement = true;\n            _grappleCooldownTimer = 1f;\n        }\n    }\n    else\n    {\n        //if you didn't hit anything / the raycast was too short to hit anything\n        //draw a line\n        _grapplePoint = _camera.position + _camera.forward * _maxGrappleDistance;\n        //stop grappling\n        Invoke(nameof(StopGrapple), _grappleDelay);\n    }\n\n    _lineRenderer.enabled = true;\n    _lineRenderer.SetPosition(1, _grapplePoint);\n}\n\nprivate void ExecuteGrapple()\n{\n    //stop the body from moving\n    _characterMovement.Rigidbody.isKinematic = true;\n    //move the character to the grapple point\n    _characterMovement.transform.position = Vector3.Lerp(\n        _characterMovement.transform.position,\n        _grapplePoint,\n        Time.deltaTime * 2f\n    );\n    //if you are close enough to the grapple point stop grappling\n    //cause the closer you get, the slower the grapple\n    if (Vector3.Distance(_characterMovement.transform.position, _grapplePoint) < 0.7f)\n    {\n        StopGrapple();\n    }\n}"
-        
-        }
-      ]
-    },
 
     {
       "id": "Muzeum Opdracht",
@@ -203,6 +42,100 @@
       "git": "https://github.com/fvugt/vr-training-sim",
       "itch": ""
     },
+        {
+      "id": "Replay Platformer",
+      "title": "Replay Platformer",
+      "tagline": "Leren porten naar verschillende platforms.",
+      "description":"Doormiddel van het porten van dit spel naar verschillende platformen heb ik veel geleerd over porten. Zo heb ik ook mijn controls versimpeld doormiddel van het nieuwe unity input systeem. In mijn platformer heb ik ook een baas gemaakt waar ik heel trots op ben, met meerde fases.",
+      "thumbnail": "Replay Platformer2.jpg",
+      "youtube": "https://www.youtube.com/embed/bU1uGO0hbDE",
+      "screenshots": [
+        "https://picsum.photos/seed/shooter1/1200/800",
+        "https://picsum.photos/seed/shooter2/1200/800"
+      ],
+      
+      
+      "tags": [
+        "Unity",
+        "Porten",
+        "New Unity Input System",
+        "Platformer"
+      ],
+      "projectRole": "Programmer",
+      "timeline": "6 weken",
+      "mechanics": [
+        {
+          "subtitle": "Grote Baas",
+          "description":"Als mijn grote baas voor dit spel wilde ik iets speciaals bouwen, een baas met drie fases. In de eerste fase gooit hij stenen op jou af, in de tweede fase krijgt hij een schild die je doormiddel van wortelen die hij inspawnt kan slopen en als laatste verdediging stuurt de baas zijn minions.",
+          "image": "bunny.jpg",
+          "code": "private void OnTriggerEnter(Collider other)\n{\n    // Start boss fight upon contact with player\n    if (!_bossFightStarted && other.gameObject.name == \"Player\")\n    {\n        _bossFightStarted = true;\n        _healthbarUI.SetActive(true);\n        _bunnyAnimator.SetBool(\"waiting\", false);\n\n        Debug.Log(\"Start Boss Coroutine\");\n        StartCoroutine(ThrowRocks());\n    }\n}\n\nprivate void HandlePhases()\n{\n    // === Phase 2 ===\n    // In phase 2, the shield is activated and the carrots appear\n    // You need to destroy the carrots to make the shield disappear\n    if (CurrentHealth == 50f && !Fase2 && !Fase3)\n    {\n        Fase2 = true;\n        _shield.SetActive(true);\n\n        foreach (GameObject carrot in _carrots)\n        {\n            carrot.SetActive(true);\n        }\n    }\n\n    // === Transition to Phase 3 ===\n    // Once all carrots are destroyed, move to phase 3\n    if (!Fase3 && _grapplingScript.DestroyedCarrots == 6)\n    {\n        Destroy(_shield);\n        CurrentHealth = 30f;\n        Fase3 = true;\n    }\n\n    // === Phase 3 Logic ===\n    // In phase 3, the boss throws minions as the last attack every few seconds\n    if (Fase3 && !_minionsSpawned)\n    {\n        Debug.Log(\"Starting the last Phase and sending minions!\");\n        _minionsSpawned = true;\n        StartCoroutine(SpawnMinions());\n    }\n}\n\n#region Coroutines\nprivate IEnumerator ThrowRocks()\n{\n    // Keep throwing rocks as long as health is above 50%\n    while (CurrentHealth > 50f)\n    {\n        Debug.Log(\"Throw rocks\");\n        Instantiate(_rockPrefab, _rockSpawnPoint.position, _rockSpawnPoint.rotation);\n        yield return new WaitForSeconds(1f);\n    }\n}\n\nprivate IEnumerator SpawnMinions()\n{\n    // Spawn minions as long as the boss is alive\n    while (CurrentHealth > 0f)\n    {\n        Instantiate(_minionPrefab, _rockSpawnPoint.position, _rockSpawnPoint.rotation);\n        Debug.Log(\"Minion spawned!\");\n        yield return new WaitForSeconds(2f);\n    }\n}\n#endregion"
+        },
+        {
+          "subtitle": "Grappeling Mechaniek",
+          "description": "Ik heb ook een grappeling mechaniek gebouwd. Deze mechaniek helpt de speler intaracteren met de wereld, je kunt grote sprongen maken en soms zelfs dingen slopen hieermee! ",
+          "image": "Grappeling.jpg",
+          "code": "private void StartGrapple()\n{\n    //check if you can grapple\n    if (_grappleCooldownTimer > 0f) return;\n\n    _isGrappling = true;\n    //freeze the player so it doesn't cause any problems while grappling\n    _characterMovement.currentState = CharacterMovement.PlayerState.Freeze;\n\n    //draw a raycast to where you want to grapple\n    RaycastHit hit;\n    if (Physics.Raycast(_camera.position, _camera.forward, out hit, _maxGrappleDistance, _whatIsGrabbable))\n    {\n        _grapplePoint = hit.point;\n        //dont allow to grapple the rock or boss\n        if (hit.collider.CompareTag(\"rock\"))\n        {\n            Invoke(nameof(StopGrapple), _grappleDelay);\n        }\n        else if (hit.collider.name == \"Boss\")\n        {\n            if (!_didBossDamage)\n            {\n                float damage = BossScript.CurrentHealth > 30f ? 5f : 1f;\n                BossScript.CurrentHealth -= damage;\n                _didBossDamage = true;\n                BossExplode.Play();\n            }\n            Invoke(nameof(StopGrapple), _grappleDelay);\n        }\n        //destroy the boss carrot if you hit it\n        else if (hit.collider.CompareTag(\"carrot\"))\n        {\n            HandleCarrot(hit);\n            Invoke(nameof(StopGrapple), _grappleDelay);\n        }\n        //if you hit an object you can actually grapple, then grapple movement = true\n        else\n        {\n            _grappleMovement = true;\n            _grappleCooldownTimer = 1f;\n        }\n    }\n    else\n    {\n        //if you didn't hit anything / the raycast was too short to hit anything\n        //draw a line\n        _grapplePoint = _camera.position + _camera.forward * _maxGrappleDistance;\n        //stop grappling\n        Invoke(nameof(StopGrapple), _grappleDelay);\n    }\n\n    _lineRenderer.enabled = true;\n    _lineRenderer.SetPosition(1, _grapplePoint);\n}\n\nprivate void ExecuteGrapple()\n{\n    //stop the body from moving\n    _characterMovement.Rigidbody.isKinematic = true;\n    //move the character to the grapple point\n    _characterMovement.transform.position = Vector3.Lerp(\n        _characterMovement.transform.position,\n        _grapplePoint,\n        Time.deltaTime * 2f\n    );\n    //if you are close enough to the grapple point stop grappling\n    //cause the closer you get, the slower the grapple\n    if (Vector3.Distance(_characterMovement.transform.position, _grapplePoint) < 0.7f)\n    {\n        StopGrapple();\n    }\n}"
+        
+        }
+      ]
+    },
+    {
+      "id": "Disco Frenzy",
+      "title": "Disco Frenzy",
+      "tagline": "Mijn eerste teamproject, een disco shooter.",
+      "description": "Ik heb in een project groep een disco shooter met robots gebouwd. Dit spel bestaal uit verschilde kamers met verschillende vijanden die ieder een kans hebben om een pickup te droppen. Het spel eindigt met een gevecht tegen een baas. Dit is het eerste groepsproject waarbij ik met een andere dev en meerdere artists moest samenwerken, een goed leermoment op het gebied van communicatie en samenwerking. ",
+      "thumbnail": "Disco frenzy.jpg",
+      "youtube": "https://www.youtube.com/embed/EoD_UPaeEVg",
+      
+      
+      "tags": [
+        "Unity",
+        "VR",
+        "Teamproject",
+        "Trello Manger"
+      ],
+      "projectRole": "Programmer",
+      "timeline": "1 week",
+      "mechanics": [
+        {
+          "subtitle": "Haptic Feedback",
+          "description": "TIjdens dit project heb ik veel in de unity editor gewerkt en zocht ik naar een uitdaging. Ik heb daarom haptic feedback toegevoed aan het spel. Het lopen simuleren vond ik het lastigste gezien het niet direct stopte en ik niet precies wist hoe ik moest kijken of de speler wel of niet bewoog. uiteindelijk is dit wel gelukt. Ik heb ook haptic feedback voor bijvoorbeeld het zwaard, pisolen, in je zak doen van objecten en geraakt worden gesiimuleerd.",
+          "image":"haptic.jpg",
+          "code": "private void Update()\n{\n    timer += Time.deltaTime;\n    if (WalkEnabled == true)\n    {\n        //keep playing the walking feeling when player is walking\n        if (isWalkingHaptic == false)\n        {\n            //play walking feeling when walking\n            BhapticsLibrary.Play(BhapticsEvent.SHORTWALK);\n            isWalkingHaptic = true;\n            timer = 0f;\n        }\n\n        if (isWalkingHaptic == true && timer > 0.6f)\n        {\n            //if the walking feeling has stopped but the player is still moving in game\n            //stop the walking haptic bool so that the walking feeling can be played again\n            isWalkingHaptic = false;\n        }\n    }\n    if (WalkEnabled == false)\n    {\n        //stop the walking feeling if the player suddenly stops moving\n        BhapticsLibrary.StopByEventId(\"WALKING\");\n    }\n}\n\nprivate void actionPerformed(InputAction.CallbackContext context)\n{\n    Vector2 input = context.ReadValue<Vector2>();\n    \n    //check the stick movement\n    //depending on that decide if player is walking or not\n    if (input.magnitude < 0.9f)\n    {\n        //not walking\n        WalkEnabled = false;\n    }\n    else if (input.magnitude > 0.9f)\n    {\n        //player is walking\n        WalkEnabled = true;\n    }\n}"
+        },
+        {
+          "subtitle": "Projectile System",
+          "description": "",
+          "image": "disco shooter.jpg",
+          "code": "protected override void Update()\n{\n    speed = 2f;\n    \n    if (projectilesTransform != null)\n    {\n        //check if the tray frisbee is already arrived back at its spawn location and then despawn it\n        if (movingBack == true && transform.position == projectilesTransform.position)\n        {\n            Destroy(this.gameObject, 0.5f);\n        }\n        //if the tray frisbee has reached the old marked position of the player move it back\n        if ((Tray.transform.position == oldPlayerTransform && movingBack == false) || movingBack == true)\n        {\n            movingBack = true;\n            Tray.transform.position = Vector3.MoveTowards(Tray.transform.position, projectilesTransform.transform.position, speed * Time.deltaTime);\n        }\n        //otherwise move the tray frisbee towards the old player transform\n        else\n        {\n            Tray.transform.position = Vector3.MoveTowards(Tray.transform.position, oldPlayerTransform, speed * Time.deltaTime);\n        }\n    }\n}"
+        }        
+      ],
+      "itch": "https://nthans.itch.io/disco-frenzy"
+    },
+    {
+      "id": "Ghost Shooter",
+      "title": "Ghost Shooter",
+      "tagline": "Een Vr ghost shooter",
+      "description": "Dit project is een vervolg op het cafe spel waarbij je in dus het cafe voor een geest-invasie moest zorgen. Hierbij heb ik voor het eerst gebruikgemaakt van statemachines, coroutines en navmeshagents. Ik vond dit een heel leuk project om te maken!",
+      "thumbnail": "GhostShooter.jpg",
+      "youtube": "https://www.youtube.com/embed/yNWPdE_39Mo",
+      "tags": [
+        "Unity",
+        "VR",
+        "StateMachine"
+      ],
+      "projectRole": "Gameplay Programmer",
+      "timeline": "3 weken",
+      "mechanics": [
+        {
+          "subtitle": "Het inspawnen van geesten en ze elke wave sterker maken",
+          "description": "Voor het maken van dit spel moest je gebruik maken van coroutines. Hierdoor kan je yeild return gebruiken om ook met tijd te kunnenn spelen tussen hoevaak je nieuwe geestenn wil inspawnen en hoeveel tijd er is tussen de volgende wave/niveau. Ook wilde ik willekeurige geesten inspawnen op willekeurige locaties doormiddel van de Random.Range() functie. Waar ik achter kwam is dat je nog een vierde parameter kan toevoegen aan een for i statement, ik had namelijk een integer nodig buiten die scope waarbij i kon bijhouden bij welke wave ik was.",
+          "image": "ghost 2.jpg",
+          "code": "IEnumerator SpawnWaves()\n{\n    for (int wave = 1; wave <= totalWaves; wave++, waveCount++) // Go through each wave\n    {\n        // Spawn the enemies for this wave\n        for (int i = 0; i < enemiesPerWave; i++)\n        {\n            SpawnEnemy(); // This spawns one enemy\n            yield return new WaitForSeconds(timeBetweenEnemies); // Wait for 1 second before spawning the next one\n        }\n        //all enemies spawned\n\n        yield return new WaitForSeconds(timeBetweenWaves); // Wait for 5 seconds before starting the next wave\n        //all waves finished\n\n    }\n\n    //all waves complete\n}\n\n// This function actually spawns the enemy at the spawn point\nvoid SpawnEnemy()\n{\n    int ghost = Random.Range(1, 5);\n    //choose which ghost to spawn\n    switch (ghost)\n    {\n        case 1:\n            ChosenGhost = enemyPrefab1;\n            break;\n        case 2:\n            ChosenGhost = enemyPrefab2;\n            break;\n        case 3:\n            ChosenGhost = enemyPrefab3;\n            break;\n        case 4:\n            ChosenGhost = enemyPrefab4;\n            break;\n    }\n\n    int randomLoc = Random.Range(1, 6);\n    Debug.Log(randomLoc);\n    //choose which location to spawn at\n    switch (randomLoc)\n    {\n        case 1:\n            newLoc = loc1;\n            break;\n        case 2:\n            newLoc = loc2;\n            break;\n        case 3:\n            newLoc = loc3;\n            break;\n        case 4:\n            newLoc = loc4;\n            break;\n        case 5:\n            newLoc = loc5;\n            break;\n    }\n\n    if (ChosenGhost != null)\n    {\n        //spawn chosen ghost at the randomly chosen location\n        spawnedGhost = Instantiate(ChosenGhost, newLoc.position, Quaternion.identity);\n    }\n\n    //depending on which wave is the current one, increase the spawned ghost health\n    health increasedHP = spawnedGhost.GetComponentInChildren<health>();\n    increasedHP.maxHealth = 40f + (waveCount - 1) * 20;\n}"
+        }
+      ],
+      "github": "https://github.com/GLU-CSD/vr-store-ellamvdh"
+    },
     {
       "id": "Save Christmas",
       "title": "Save Christmas",
@@ -238,7 +171,74 @@
       ],
       "git": "https://github.com/fvugt/vr-training-sim",
       "itch": ""
+    },
+    
+    {
+      "id": "Cafe Game",
+      "title": "Cafe Game",
+      "tagline": "Een simpel Vr cafe spel.",
+      "description":"We moesten dit project een Vr Supermarkt bouwen doormiddel van probuilden en die dan simuleren in VR. Zelf voelde ik niks voor een supermarkt bouwen dus ben ik gaan kijken of een cafe ook mocht zolang het dezelfde elemente had, dit mocht. In dit Cafe heb ik vele elementen toegevoegd zoals betaalbaar eten, een alarm systeem voor als je steelt, speelbare instumenten en natuurlijk een cafe mini game, waar ik het meest trots op ben! ",
+      "thumbnail": "Cafe Game.jpg",
+      "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "screenshots": [
+        "Cafe Game.jpg",
+        "cafe 1.jpg"
+      ],
+      "tags": [
+        "Unity",
+        "VR",
+        "ProBuilder"
+      ],
+      "projectRole": "Gameplay Programmer",
+      "timeline": "3 weken",
+      "mechanics": [
+        
+        {
+          "subtitle": "Eten inspawnen bij juiste combinatie van ingredienten",
+          "description": "Om het spel te spelen moet je doormiddel van het combineren van de juiste ingredienten eten laten ontstaan. In dit script check ik welke ingredienten op welk bord ligt en afhankelijk daarvan zorg ik dat het juiste product wordt ingespawned.",
+          "image": "cafe 3.jpg",
+          "code": "func _physics_process(delta: float) -> void:/n	#update healthbar based on hp/n	progressBar.value =  CurrentHealth/n	timer += delta/n#fsm for wandering, attacking and death`/n	match state:/n		State.Wandering:/n			current_pos = position.x/n			position.x+= movement * delta/n			_wandering()/n		State.Attacking:/n			_attacking()/n		State.Dead:/n			if star != null:/n				star.process_mode = Node.PROCESS_MODE_INHERIT/n				star.visible = true	/n			queue_free()/n#check if player entered aura to start attacking/nfunc _on_area_2d_body_entered(body: Node2D) -> void:/n	if body.name == "CharacterBody2D" :/n		state = State.Attacking/n		in_area = true	/n#check if player exeted aura to stop attacking/nfunc _on_area_2d_body_exited(body: Node2D) -> void:/n	state = State.Wandering/n	in_area = false	/n/n#function for wandering/nfunc _wandering()-> void:/n	if CurrentHealth <= 0:/n		state	= State.Dead/n	anim_slime.play("default")/n	#check if moving left or right/n	#update movement based on this/n	if moving_left == true	:/n		movement = -10/n	else: if moving_right == true:/n		movement = 10/n	#check if loc 1 / 2 was reached and then change directions/n	if current_pos <= loc2:/n		moving_right = true/n		moving_left = false	/n		#turn slime/n		scale = Vector2(-1, 1)/n		/n	else: if current_pos >= loc1:/n		moving_right = false/n		moving_left = true/n		#turn slime/n		scale = Vector2(1, 1)	/n#function for attacking/nfunc _attacking()-> void:/n	if CurrentHealth <= 0:/n		state = State.Dead	/n	#check if player is attacking/n	if Player.attacked == true:/n		#if player has attacked damage the slime/n		CurrentHealth -= 34/n		Player.attacked = false/n	if Player.attack_playing == false:/n		#if player is not attacking attack every 5 sec/n		anim_slime.play("attack")/n		if timer > 1: /n			attack_sound.play()/n			timer = 0/n			Player._take_damage(5)",
+
+      ],
+      "github": "https://github.com/GLU-CSD/vr-store-ellamvdh"
+      
+      
+    },
+    
+    {
+      "id": "c++",
+      "title": "C++ turn based strategy",
+      "tagline": "Klein console vecht spel",
+      "description": "",
+      "thumbnail": "cpp.jpg",
+      
+      
+      
+      "tags": [
+        "C++",
+        "cxxdroid",
+        "Console Game"
+      ],
+      "projectRole": "Programmer",
+      "timeline": "1 week",
+      "mechanics": [
+        {
+          "subtitle": "Enemy AI State Machine",
+          "description": "Een finite state machine voor vijanden die dynamisch schakelt tussen Idle → Chase → Attack → Retreat states. In Chase gebruiken enemies navmesh pathfinding, in Attack positioneren ze zich tactisch, en in Retreat trekken ze zich terug naar cover bij lage health. Verschillende enemy types hebben eigen parameters voor aggression range en attack patterns.",
+          "image": "PixelHeroes.jpg",
+          "code": "void Update()\n{\n    switch(state)\n    {\n        case Idle:\n            LookForPlayer();\n            break;\n\n        case Chase:\n            MoveTowardPlayer();\n            break;\n\n        case Attack:\n            TryShoot();\n            break;\n    }\n}"
+        },
+        {
+          "subtitle": "Projectile System",
+          "description": "Hit-detection via raycasts met instant feedback - veel sneller en accurater dan physics-based projectiles. De raycast spawned een hit effect op het impact point en gebruikt layer masks om te bepalen wat geraakt kan worden. Elk schot krijgt een tracer effect die de bullet path visualiseert.",
+          "image": "bosscpp.jpg",
+          "code": "void Shoot()\n{\n    Ray ray = new Ray(transform.position, transform.forward);\n\n    if (Physics.Raycast(ray, out var hit, 50f))\n    {\n        Debug.Log($\"Hit {hit.collider.name}\");\n    }\n}"
+        }
+      ]
     }
+
+    
+    
     
   ]
 }

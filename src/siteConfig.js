@@ -24,5 +24,5 @@ Ik ben leergierig, oplossingsgericht en ambitieus.
   `,
   softSkills: ["Samenwerken met artists", "Feedback geven & ontvangen", "Creatief en probleemoplossend", "Communicatief sterk", "Hoog doorzettingsvermogen", ],
 
-  hardSkills: ["Unity & XR Interaction Toolkit", "C#, C++, Javascript", "VR development, hardware-integratie","Cross-platform development","Prototyping, debugging, testen", "Git & Version Control"],
+  hardSkills: ["Unity & XR Interaction Toolkit","Godot", "C#, C++, Javascript, GDscript", "VR development, hardware-integratie","Cross-platform development","Prototyping, debugging, testen", "Git & Version Control"],
 };
