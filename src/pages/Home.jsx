@@ -46,18 +46,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="projects-section">
-        <div className="projects-container">
-          <h2 className="projects-title">Mijn Projecten</h2>
-
-          {/* Grid with ProjectCards */}
-          <div className="projects-grid">
-            {projects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
     </div>
   );
