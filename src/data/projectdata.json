@@ -7,7 +7,7 @@
       "tagline": "Een geologisch avontuur voor kinderen",
       "description": "Tijdens dit project heb ik samengewerkt in een teamverband met zowel artits als developers. Samen hebben we als opdracht voor een muzeum een geologisch avontuur gebouwd voor kinderen tussen acht en tien jaar. Doormiddel van kinderen dit spel te laten spelen wilden we ze inzicht geven hoe het is om een geoloog te zijn en ze tegelijkertijd iets over verschillende stenen en fosielen leren. Dit project hebben we werkend gekregen op een touchtafel waar onze school over beschikt.",
       "thumbnail": "njg.jpg",
-      "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "youtube": "https://www.youtube.com/embed/fl2-pdxtwgw",
       "screenshots": [
         "njg3.jpg",
         "njg4.jpg",
@@ -34,7 +34,7 @@
         {
           "subtitle": "Touch detection script",
           "description":"Dit spel hebben we werkend gekregen op een touchtafel. Hiervoor moest ik de code voor de aanraking van het scherm coderen. Hierbij heb ik gebruik gemaakt van een 3d raycast naar 3d colliders, ookal is dit een 2d spel, gezien dat makkelijker was dan werken met een 2d raycast.",
-          "image": "https://placehold.co/600x400?text=Guide+System",
+          "image": "touch-table.jpg",
           "code":"private void CheckForTouchInput()\n{   \n    //kijk of er getikt is op het scherm\n    if (Input.touchCount > 0)\n    {\n        Touch touch = Input.GetTouch(0);\n        if (touch.phase == UnityEngine.TouchPhase.Began)\n        { \n            //haal positie van touch op en stuur een raycast ernaartoe\n            DetectObject(touch.position);\n        }\n    }\n    //kijk of er geklikt is op het scherm\n    if (Input.GetMouseButtonDown(0))\n    {\n        //haal de positie op van de klik en stuur een raycast ernaartoe\n        DetectObject(Input.mousePosition);\n    }\n}\nvoid DetectObject(Vector2 screenPOs)\n{\n    // maak een raycast aan \n    Ray ray = Camera.main.ScreenPointToRay(screenPOs);\n    RaycastHit hit;\n    \n    // begin linerenderer op de camera\n    _lineRenderer.SetPosition(0, ray.origin);\n\n    //functie om een raycast te tekenen naar het object en info op te halen\n    if (Physics.Raycast(ray, out hit))\n    {\n        // linerenderer eindigt hier\n        _lineRenderer.SetPosition(1, hit.point);\n\n        //haal object geraakte\n        GameObject hitOBJ = hit.collider.gameObject;\n\n        //kijk of het object dat geraakt heeft gebrushed of gebreaked kan worden>\n        //heeft het een breakable?\n        IBreakable breakable = hitOBJ.GetComponent<IBreakable>();\n        //heeft het een brushable\n        IBrushable brushable = hitOBJ.GetComponent<IBrushable>();\n        //heeft het en go to rock om naar een graafscene te gaan?\n        IGoToRockScene gotorock = hitOBJ.GetComponent<IGoToRockScene>()\n        //heeft het object een pickup script?\n        pickup pickup= hitOBJ.GetComponent<pickup>();\n        //voer hierna de logica uit als het een bepaalde interface heeft "
         }
         
@@ -140,37 +140,26 @@
       "id": "Save Christmas",
       "title": "Save Christmas",
       "tagline": "Kort Spel waar je kerst moet redden",
-      "description": "Deze VR training simulator is gebouwd voor het oefenen van complexe industriële procedures in een volledig veilige virtuele omgeving. Het doel was om een training te creëren die net zo effectief is als hands-on training, maar zonder de risico's en kosten.\n\nDe focus lag op realistische hand-tracking voor natuurlijke interacties, stapsgewijze instructies die gebruikers begeleiden en gedetailleerde feedback op gebruikersacties waarbij immediate feedback het leerproces versterkt.\n\nHet project leerde mij hoe je effectieve VR training ervaringen ontwerpt met verschillende difficulty modes en performance tracking om daadwerkelijk kennisoverdracht te bevorderen.",
-      "thumbnail": "save christmas.jpg",
-      "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
-      "screenshots": [
-        "https://picsum.photos/seed/vrt1/1200/800",
-        "https://picsum.photos/seed/vrt2/1200/800",
-        "https://picsum.photos/seed/vrt3/1200/800"
-      ],
+      "description":"Tijdens de kertvakantie leek het mij leuk om een klein spel te bouwen in Godot. Ik heb een kort spel gemaakt waarbij je kerst moet redden door sterren te verzamelen. Godot was voor mij een neiuwe engine, het was leuk om weer iets nieuws te leren.",      "thumbnail": "save christmas.jpg",
+      "youtube": "https://www.youtube.com/embed/nkKictWg8BU",
       "tags": [
         "Godot",
         "GDscript",
         "2D"
       ],
-      "projectRole": "VR Developer",
-      "timeline": "4 weken",
+      "projectRole": "Developer",
+      "timeline": "4 dagen",
       "mechanics": [
         {
           "subtitle": "Step-by-Step Guide System",
-          "description": "Een dynamisch instructiesysteem dat de gebruiker door complexe multi-step procedures leidt met real-time visual guidance. Elke step heeft validation criteria die checken of de actie correct is uitgevoerd. In guided mode krijg je hints als je te lang stilstaat, terwijl advanced mode minimale assists heeft voor realistischere training.",
-          "image": "https://placehold.co/600x400?text=Guide+System",
-          "code": "public class StepGuide : MonoBehaviour\n{\n    public List<TrainingStep> steps;\n    private int currentStep = 0;\n\n    void CheckStepCompletion()\n    {\n        if (steps[currentStep].IsCompleted())\n        {\n            currentStep++;\n            ShowNextInstruction();\n        }\n    }\n}"
-        },
-        {
-          "subtitle": "Hand Tracking Validation",
-          "description": "Controleert of handposities en hand poses correct zijn voor specifieke acties door palm orientation en finger positions te valideren. Wanneer je grip incorrect is, verschijnt een ghost hand overlay die de correcte positie toont. Dit is veel effectiever dan tekstuele instructies omdat mensen de juiste pose kunnen imiteren.",
-          "image": "https://placehold.co/600x400?text=Hand+Tracking",
-          "code": "bool ValidateHandPose(HandPose required)\n{\n    float similarity = Vector3.Dot(\n        currentPose.palmNormal,\n        required.palmNormal\n    );\n\n    return similarity > 0.95f;\n}"
+          "description": "State machine voor slime enemy.",
+          "image": "slimes.jpg",
+          "code": "func _physics_process(delta: float) -> void:\n\t# update healthbar based on hp\n\tprogressBar.value = CurrentHealth\n\ttimer += delta\n\t# fsm for wandering, attacking and death\n\tmatch state:\n\t\tState.Wandering:\n\t\t\tcurrent_pos = position.x\n\t\t\tposition.x += movement * delta\n\t\t\t_wandering()\n\t\tState.Attacking:\n\t\t\t_attacking()\n\t\tState.Dead:\n\t\t\tif star != null:\n\t\t\t\tstar.process_mode = Node.PROCESS_MODE_INHERIT\n\t\t\t\tstar.visible = true\n\t\t\tqueue_free()\n\n# check if player entered aura to start attacking\nfunc _on_area_2d_body_entered(body: Node2D) -> void:\n\tif body.name == \"CharacterBody2D\":\n\t\tstate = State.Attacking\n\t\tin_area = true\n\n# check if player exited aura to stop attacking\nfunc _on_area_2d_body_exited(body: Node2D) -> void:\n\tstate = State.Wandering\n\tin_area = false\n\n# function for wandering\nfunc _wandering() -> void:\n\tif CurrentHealth <= 0:\n\t\tstate = State.Dead\n\t\tanim_slime.play(\"default\")\n\n\t# update movement direction\n\tif moving_left:\n\t\tmovement = -10\n\telif moving_right:\n\t\tmovement = 10\n\n\t# change direction at bounds\n\tif current_pos <= loc2:\n\t\tmoving_right = true\n\t\tmoving_left = false\n\t\tscale = Vector2(-1, 1)\n\telif current_pos >= loc1:\n\t\tmoving_right = false\n\t\tmoving_left = true\n\t\tscale = Vector2(1, 1)\n\n# function for attacking\nfunc _attacking() -> void:\n\tif CurrentHealth <= 0:\n\t\tstate = State.Dead\n\n\t# player attacking slime\n\tif Player.attacked:\n\t\tCurrentHealth -= 34\n\t\tPlayer.attacked = false\n\n\t# slime attacking player\n\tif Player.attack_playing == false:\n\t\tanim_slime.play(\"attack\")\n\t\tif timer > 1:\n\t\t\tattack_sound.play()\n\t\t\ttimer = 0\n\t\t\tPlayer._take_damage(5)"
         }
+        
       ],
-      "git": "https://github.com/fvugt/vr-training-sim",
-      "itch": ""
+      "git": "https://github.com/Dmdmym/christmass-2025"
+      
     },
     
     {
@@ -179,7 +168,7 @@
       "tagline": "Een simpel Vr cafe spel.",
       "description":"We moesten dit project een Vr Supermarkt bouwen doormiddel van probuilden en die dan simuleren in VR. Zelf voelde ik niks voor een supermarkt bouwen dus ben ik gaan kijken of een cafe ook mocht zolang het dezelfde elemente had, dit mocht. In dit Cafe heb ik vele elementen toegevoegd zoals betaalbaar eten, een alarm systeem voor als je steelt, speelbare instumenten en natuurlijk een cafe mini game, waar ik het meest trots op ben! ",
       "thumbnail": "Cafe Game.jpg",
-      "youtube": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "youtube": "https://www.youtube.com/embed/acJ22977enA",
       "screenshots": [
         "Cafe Game.jpg",
         "cafe 1.jpg"
@@ -197,8 +186,8 @@
           "subtitle": "Eten inspawnen bij juiste combinatie van ingredienten",
           "description": "Om het spel te spelen moet je doormiddel van het combineren van de juiste ingredienten eten laten ontstaan. In dit script check ik welke ingredienten op welk bord ligt en afhankelijk daarvan zorg ik dat het juiste product wordt ingespawned.",
           "image": "cafe 3.jpg",
-          "code": "func _physics_process(delta: float) -> void:/n	#update healthbar based on hp/n	progressBar.value =  CurrentHealth/n	timer += delta/n#fsm for wandering, attacking and death`/n	match state:/n		State.Wandering:/n			current_pos = position.x/n			position.x+= movement * delta/n			_wandering()/n		State.Attacking:/n			_attacking()/n		State.Dead:/n			if star != null:/n				star.process_mode = Node.PROCESS_MODE_INHERIT/n				star.visible = true	/n			queue_free()/n#check if player entered aura to start attacking/nfunc _on_area_2d_body_entered(body: Node2D) -> void:/n	if body.name == "CharacterBody2D" :/n		state = State.Attacking/n		in_area = true	/n#check if player exeted aura to stop attacking/nfunc _on_area_2d_body_exited(body: Node2D) -> void:/n	state = State.Wandering/n	in_area = false	/n/n#function for wandering/nfunc _wandering()-> void:/n	if CurrentHealth <= 0:/n		state	= State.Dead/n	anim_slime.play("default")/n	#check if moving left or right/n	#update movement based on this/n	if moving_left == true	:/n		movement = -10/n	else: if moving_right == true:/n		movement = 10/n	#check if loc 1 / 2 was reached and then change directions/n	if current_pos <= loc2:/n		moving_right = true/n		moving_left = false	/n		#turn slime/n		scale = Vector2(-1, 1)/n		/n	else: if current_pos >= loc1:/n		moving_right = false/n		moving_left = true/n		#turn slime/n		scale = Vector2(1, 1)	/n#function for attacking/nfunc _attacking()-> void:/n	if CurrentHealth <= 0:/n		state = State.Dead	/n	#check if player is attacking/n	if Player.attacked == true:/n		#if player has attacked damage the slime/n		CurrentHealth -= 34/n		Player.attacked = false/n	if Player.attack_playing == false:/n		#if player is not attacking attack every 5 sec/n		anim_slime.play("attack")/n		if timer > 1: /n			attack_sound.play()/n			timer = 0/n			Player._take_damage(5)",
-
+          "code": "void Update()\n{\n    timer += Time.deltaTime;\n\n    float TimeRemaining = timeForCustomers - timer;\n    timerText.text = Mathf.Round(TimeRemaining).ToString();\n\n    //turn the hurry up text on if there is only 1/3 time left of the timer\n\n    float HurryUpTime = timeForCustomers / 3;\n\n    if (TimeRemaining < HurryUpTime)\n    {\n        hurryUpText.text = \"Hurry Up!\";\n    }\n    else\n    {\n        hurryUpText.text = \"\";\n    }\n\n    // If the timer reaches 60 seconds, change the customer and meal or if the right item is placed in the snappoint\n    if (timer >= timeForCustomers || givefoodtocustomers.GoToNextCustomer == true)\n    {\n        if (timer >= timeForCustomers && givefoodtocustomers.GoToNextCustomer == false)\n        {\n            //update score - 2;\n        }\n        else\n        {\n            //update score +1;\n        }\n\n        givefoodtocustomers.GoToNextCustomer = false;\n        timer = 0f;\n\n        CHOSENcustomer.SetActive(false);\n\n        randomMeel = Random.Range(1, 7);\n        randomCustomer = Random.Range(1, 8);\n\n        switch (randomCustomer)\n        {\n            case 1: CHOSENcustomer = Customer1; break;\n            case 2: CHOSENcustomer = Customer2; break;\n            case 3: CHOSENcustomer = Customer3; break;\n            case 4: CHOSENcustomer = Customer4; break;\n            case 5: CHOSENcustomer = Customer5; break;\n            case 6: CHOSENcustomer = Customer6; break;\n            case 7: CHOSENcustomer = Customer7; break;\n            default: Debug.Log(\"Random customer was out of bounds\"); break;\n        }\n\n        switch (randomMeel)\n        {\n            case 1: CHOSenMeal = 1; mealText.text = \"Ik wil een taart!\"; break;\n            case 2: CHOSenMeal = 2; mealText.text = \"Ik wil een broodje...\"; break;\n            case 3: CHOSenMeal = 3; mealText.text = \"Mag ik een bagel?\"; break;\n            case 4: CHOSenMeal = 4; mealText.text = \"Drankje 1 alsjeblieft!\"; break;\n            case 5: CHOSenMeal = 5; mealText.text = \"HMMM, drankje 2 ziet er wel goed uit.\"; break;\n            case 6: CHOSenMeal = 6; mealText.text = \"Zou ik drankje 3 mogen proberen?\"; break;\n            default: Debug.Log(\"Random meal was out of bounds\"); break;\n        }\n\n        CHOSENcustomer.SetActive(true);\n    }\n}"
+        }
       ],
       "github": "https://github.com/GLU-CSD/vr-store-ellamvdh"
       
@@ -209,9 +198,9 @@
       "id": "c++",
       "title": "C++ turn based strategy",
       "tagline": "Klein console vecht spel",
-      "description": "",
+      "description": "Kleine turn based strategy game gemaakt in console c++. Dit spel heb ik op mijn mobiel gemaakt op cxxdroid (een c++ compiler voor andriod).",
       "thumbnail": "cpp.jpg",
-      
+      "youtube": "https://www.youtube.com/embed/Z0svgpmLxl4",
       
       
       "tags": [
@@ -223,16 +212,10 @@
       "timeline": "1 week",
       "mechanics": [
         {
-          "subtitle": "Enemy AI State Machine",
-          "description": "Een finite state machine voor vijanden die dynamisch schakelt tussen Idle → Chase → Attack → Retreat states. In Chase gebruiken enemies navmesh pathfinding, in Attack positioneren ze zich tactisch, en in Retreat trekken ze zich terug naar cover bij lage health. Verschillende enemy types hebben eigen parameters voor aggression range en attack patterns.",
+          "subtitle": "Speciale en normale aanval",
+          "description": "Voor mijn turn based strategy wilde ik dat elke speler een speciale en een normale aanval heeft, hierbij kunnen ze maar een keer hun special gebruiken. Elke speler heef een andere health, attack, defece en special. ",
           "image": "PixelHeroes.jpg",
-          "code": "void Update()\n{\n    switch(state)\n    {\n        case Idle:\n            LookForPlayer();\n            break;\n\n        case Chase:\n            MoveTowardPlayer();\n            break;\n\n        case Attack:\n            TryShoot();\n            break;\n    }\n}"
-        },
-        {
-          "subtitle": "Projectile System",
-          "description": "Hit-detection via raycasts met instant feedback - veel sneller en accurater dan physics-based projectiles. De raycast spawned een hit effect op het impact point en gebruikt layer masks om te bepalen wat geraakt kan worden. Elk schot krijgt een tracer effect die de bullet path visualiseert.",
-          "image": "bosscpp.jpg",
-          "code": "void Shoot()\n{\n    Ray ray = new Ray(transform.position, transform.forward);\n\n    if (Physics.Raycast(ray, out var hit, 50f))\n    {\n        Debug.Log($\"Hit {hit.collider.name}\");\n    }\n}"
+          "code": "//let the user attack or use their special\n\n     do{\n     cout<<\"Type 'a' to attack and 's' to special attack\\n\\n\";\n     cin>>userInput;\n     }while(userInput!= \"s\"&& userInput != \"S\" && userInput!= \"a\" && userInput!= \"A\" );\n\t\n     //clear the creen\n     system(\"cls\");\n\t\n     if(userInput == \"a\"|| userInput ==\"A\"){\n         cout<<\"You chose to attack! \\n\";\n         int EnemyHealth = stoi(boss[1]);\n         //minus player atk\n         EnemyHealth -= stoi(charcaters[ChosenCharachter][2]);\n         \n         //plus enemy def\n         EnemyHealth += stoi(boss[3]);\n         \n         boss[1] = to_string(EnemyHealth);\n         \n        cout<<\"You did \"; cout<<stoi(charcaters[ChosenCharachter][2]) - stoi(boss[3]); \n        cout<<\" damage! \\n\\n\";\n        \n        //enemy does damage here\n        int NewPlayerHealth = stoi(charcaters[ChosenCharachter][1]);\n        //minus enemy attack, pkus chafvatwr def\n        \n        NewPlayerHealth -= (stoi(boss[2]));\n        NewPlayerHealth += (stoi(charcaters[ChosenCharachter][3]));\n     \n       charcaters[ChosenCharachter][1] = to_string(NewPlayerHealth);\n       cout<<\"Enemy did \" + to_string(((stoi(boss[2])) - (stoi(charcaters[ChosenCharachter][3]))));\n       cout<<\" damage to you!\\n\\n\";\n        \n        \n         \n     }else if(SpecialRemaing == 1){\n         \n         cout<<\"You chose to use your special! \\n\";\n         //depending on chosencharacter use the special\n         switch(ChosenCharachter){\n             \n             case 0:\n             //special-restore 30 hp to self\n             charcaters[ChosenCharachter][1] = to_string(stoi(charcaters[ChosenCharachter][1]) + 30);\n             cout<<\"You used \"+ charcaters[ChosenCharachter][4] +\" and restored 30 hp to yourself!\\n\\n\";\n             \n             \n             break;\n             \n             case 1:{\n             //special-double attack\n             int EnemyHealth = stoi(boss[1]);\n         //minus double player atk\n         EnemyHealth -= stoi(charcaters[ChosenCharachter][2]) *2;\n         \n         //plus enemy def\n         EnemyHealth += stoi(boss[3]);\n         \n         boss[1] = to_string(EnemyHealth);\n         \n             cout<<\"You used \"+ charcaters[ChosenCharachter][4] + \" and did \";\n             cout<<stoi(charcaters[ChosenCharachter][2]) - stoi(boss[3]); \n        cout<<\" double damage! \\n\\n\";\n             break;\n             }\n             \n             case 2:{\n                 int bossdef = stoi(boss[3]);\n                 bossdef -= 15;\n                 \n                 boss[3] = to_string(bossdef);\n             //lower boss def for the next move\n             cout<<\"You used \"+ charcaters[ChosenCharachter][4] +\" and lowered enemy defence!\\n\\n\";\n             break;\n             }\n             \n             case 3:\n             //do a 70 atk but lose all def\n             \n             int EnemyHealth = stoi(boss[1]);\n         //minus double player atk\n         EnemyHealth -= 70;\n         \n         //plus enemy def\n         EnemyHealth += stoi(boss[3]);\n         \n         boss[1] = to_string(EnemyHealth);\n         charcaters[ChosenCharachter][3] = to_string(0);\n             cout<<\"You used \"+ charcaters[ChosenCharachter][4] + \" and did 70 atk but lost all your def...\\n\\n\";\n             break;\n             \n         }\n         SpecialRemaing =0;\n         //enrnmy attack here\n         //enemy does damage here\n        int NewPlayerHealth = stoi(charcaters[ChosenCharachter][1]);\n        //minus enemy attack, pkus chafvatwr def\n        \n        NewPlayerHealth -= (stoi(boss[2]));\n        NewPlayerHealth += (stoi(charcaters[ChosenCharachter][3]));\n     \n       charcaters[ChosenCharachter][1] = to_string(NewPlayerHealth);\n       cout<<\"Enemy did \" + to_string(((stoi(boss[2])) - (stoi(charcaters[ChosenCharachter][3]))));\n       cout<<\" damage to you!\\n\\n\";\n     }else{\n         cout<<\"You allready used your special! \\n\\n\";\n     }"
         }
       ]
     }
