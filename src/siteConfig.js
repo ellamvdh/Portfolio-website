@@ -1,4 +1,5 @@
-import myPhoto from "./assets/profile2.jpg"; // adjust path if needed
+import myPhoto from "./assets/profile2.jpg";
+
 
 export const siteConfig = {
   name: "Ella Marije van den Hoogenband",
