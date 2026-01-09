@@ -15,14 +15,14 @@ export const siteConfig = {
     itch: "https://itch.io/profile/ellamvdh",
   },
 
-  aboutLong: `
-Ik ben Ella van den Hoogenband en ik ben een gepasioneerde developer. Momenteel studeer ik XR-developemt waar ik games leer bouwen voor verschillende hardware zoals VR-brillen, Steam Deck, mobiele aparaten, web en windows. 
+ aboutLong: `
+Ik ben Ella van den Hoogenband en ik ben een gepassioneerde developer. Momenteel studeer ik XR-development, waarbij ik games leer bouwen voor verschillende hardware, zoals VR-brillen, Steam Deck, mobiele apparaten, web en Windows.
 
-
-Tijdens mijn studie heb ik verschillende vaardigheden ontwikkeld zoals het leren werken in een teamverband, de basis van een game eninge en hoe ik snel nieuwe programeer talen kan leren ontcijferen.
+Tijdens mijn studie heb ik verschillende vaardigheden ontwikkeld, zoals het werken in een teamverband, de basis van een game-engine en hoe ik snel nieuwe programmeertalen kan leren begrijpen.
 
 Ik ben leergierig, oplossingsgericht en ambitieus.
-  `,
+`,
+
   softSkills: ["Samenwerken met artists", "Feedback geven & ontvangen", "Creatief en probleemoplossend", "Communicatief sterk", "Hoog doorzettingsvermogen", ],
 
   hardSkills: ["Unity & XR Interaction Toolkit","Godot", "C#, C++, Javascript, GDscript", "VR development, hardware-integratie","Cross-platform development","Prototyping, debugging, testen", "Git & Version Control"],
