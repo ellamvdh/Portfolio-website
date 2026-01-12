@@ -77,6 +77,31 @@
       ]
     },
     {
+      "id": "c++",
+      "title": "C++ turn based strategy",
+      "tagline": "Klein console vecht spel",
+      "description": "Kleine turn-based strategy game gemaakt in console-C++. Dit spel heb ik op mijn mobiel ontwikkeld met CxxDroid, een C++ compiler voor Android.",
+      "thumbnail": "cpp.jpg",
+      "youtube": "https://www.youtube.com/embed/Z0svgpmLxl4",
+      
+      
+      "tags": [
+        "C++",
+        "cxxdroid",
+        "Console Game"
+      ],
+      "projectRole": "Programmer",
+      "timeline": "1 week",
+      "mechanics": [
+        {
+          "subtitle": "Speciale en normale aanval",
+          "description": "Voor mijn turn-based strategy wilde ik dat elke speler een speciale en een normale aanval heeft, waarbij ze hun speciale aanval slechts één keer kunnen gebruiken. Elke speler heeft verschillende health, attack, defense en special.",
+          "image": "PixelHeroes.jpg",
+          "code": "//let the user attack or use their special\n\n     do{\n     cout<<\"Type 'a' to attack and 's' to special attack\\n\\n\";\n     cin>>userInput;\n     }while(userInput!= \"s\"&& userInput != \"S\" && userInput!= \"a\" && userInput!= \"A\" );\n\t\n     //clear the creen\n     system(\"cls\");\n\t\n     if(userInput == \"a\"|| userInput ==\"A\"){\n         cout<<\"You chose to attack! \\n\";\n         int EnemyHealth = stoi(boss[1]);\n         //minus player atk\n         EnemyHealth -= stoi(charcaters[ChosenCharachter][2]);\n         \n         //plus enemy def\n         EnemyHealth += stoi(boss[3]);\n         \n         boss[1] = to_string(EnemyHealth);\n         \n        cout<<\"You did \"; cout<<stoi(charcaters[ChosenCharachter][2]) - stoi(boss[3]); \n        cout<<\" damage! \\n\\n\";\n        \n        //enemy does damage here\n        int NewPlayerHealth = stoi(charcaters[ChosenCharachter][1]);\n        //minus enemy attack, pkus chafvatwr def\n        \n        NewPlayerHealth -= (stoi(boss[2]));\n        NewPlayerHealth += (stoi(charcaters[ChosenCharachter][3]));\n     \n       charcaters[ChosenCharachter][1] = to_string(NewPlayerHealth);\n       cout<<\"Enemy did \" + to_string(((stoi(boss[2])) - (stoi(charcaters[ChosenCharachter][3]))));\n       cout<<\" damage to you!\\n\\n\";\n        \n        \n         \n     }else if(SpecialRemaing == 1){\n         \n         cout<<\"You chose to use your special! \\n\";\n         //depending on chosencharacter use the special\n         switch(ChosenCharachter){\n             \n             case 0:\n             //special-restore 30 hp to self\n             charcaters[ChosenCharachter][1] = to_string(stoi(charcaters[ChosenCharachter][1]) + 30);\n             cout<<\"You used \"+ charcaters[ChosenCharachter][4] +\" and restored 30 hp to yourself!\\n\\n\";\n             \n             \n             break;\n             \n             case 1:{\n             //special-double attack\n             int EnemyHealth = stoi(boss[1]);\n         //minus double player atk\n         EnemyHealth -= stoi(charcaters[ChosenCharachter][2]) *2;\n         \n         //plus enemy def\n         EnemyHealth += stoi(boss[3]);\n         \n         boss[1] = to_string(EnemyHealth);\n         \n             cout<<\"You used \"+ charcaters[ChosenCharachter][4] + \" and did \";\n             cout<<stoi(charcaters[ChosenCharachter][2]) - stoi(boss[3]); \n        cout<<\" double damage! \\n\\n\";\n             break;\n             }\n             \n             case 2:{\n                 int bossdef = stoi(boss[3]);\n                 bossdef -= 15;\n                 \n                 boss[3] = to_string(bossdef);\n             //lower boss def for the next move\n             cout<<\"You used \"+ charcaters[ChosenCharachter][4] +\" and lowered enemy defence!\\n\\n\";\n             break;\n             }\n             \n             case 3:\n             //do a 70 atk but lose all def\n             \n             int EnemyHealth = stoi(boss[1]);\n         //minus double player atk\n         EnemyHealth -= 70;\n         \n         //plus enemy def\n         EnemyHealth += stoi(boss[3]);\n         \n         boss[1] = to_string(EnemyHealth);\n         charcaters[ChosenCharachter][3] = to_string(0);\n             cout<<\"You used \"+ charcaters[ChosenCharachter][4] + \" and did 70 atk but lost all your def...\\n\\n\";\n             break;\n             \n         }\n         SpecialRemaing =0;\n         //enrnmy attack here\n         //enemy does damage here\n        int NewPlayerHealth = stoi(charcaters[ChosenCharachter][1]);\n        //minus enemy attack, pkus chafvatwr def\n        \n        NewPlayerHealth -= (stoi(boss[2]));\n        NewPlayerHealth += (stoi(charcaters[ChosenCharachter][3]));\n     \n       charcaters[ChosenCharachter][1] = to_string(NewPlayerHealth);\n       cout<<\"Enemy did \" + to_string(((stoi(boss[2])) - (stoi(charcaters[ChosenCharachter][3]))));\n       cout<<\" damage to you!\\n\\n\";\n     }else{\n         cout<<\"You allready used your special! \\n\\n\";\n     }"
+        }
+      ]
+    },
+    {
       "id": "Disco Frenzy",
       "title": "Disco Frenzy",
       "tagline": "Mijn eerste teamproject, een disco shooter.",
@@ -190,33 +215,9 @@
       "github": "https://github.com/GLU-CSD/vr-store-ellamvdh"
       
       
-    },
-    
-    {
-      "id": "c++",
-      "title": "C++ turn based strategy",
-      "tagline": "Klein console vecht spel",
-      "description": "Kleine turn-based strategy game gemaakt in console-C++. Dit spel heb ik op mijn mobiel ontwikkeld met CxxDroid, een C++ compiler voor Android.",
-      "thumbnail": "cpp.jpg",
-      "youtube": "https://www.youtube.com/embed/Z0svgpmLxl4",
-      
-      
-      "tags": [
-        "C++",
-        "cxxdroid",
-        "Console Game"
-      ],
-      "projectRole": "Programmer",
-      "timeline": "1 week",
-      "mechanics": [
-        {
-          "subtitle": "Speciale en normale aanval",
-          "description": "Voor mijn turn-based strategy wilde ik dat elke speler een speciale en een normale aanval heeft, waarbij ze hun speciale aanval slechts één keer kunnen gebruiken. Elke speler heeft verschillende health, attack, defense en special.",
-          "image": "PixelHeroes.jpg",
-          "code": "//let the user attack or use their special\n\n     do{\n     cout<<\"Type 'a' to attack and 's' to special attack\\n\\n\";\n     cin>>userInput;\n     }while(userInput!= \"s\"&& userInput != \"S\" && userInput!= \"a\" && userInput!= \"A\" );\n\t\n     //clear the creen\n     system(\"cls\");\n\t\n     if(userInput == \"a\"|| userInput ==\"A\"){\n         cout<<\"You chose to attack! \\n\";\n         int EnemyHealth = stoi(boss[1]);\n         //minus player atk\n         EnemyHealth -= stoi(charcaters[ChosenCharachter][2]);\n         \n         //plus enemy def\n         EnemyHealth += stoi(boss[3]);\n         \n         boss[1] = to_string(EnemyHealth);\n         \n        cout<<\"You did \"; cout<<stoi(charcaters[ChosenCharachter][2]) - stoi(boss[3]); \n        cout<<\" damage! \\n\\n\";\n        \n        //enemy does damage here\n        int NewPlayerHealth = stoi(charcaters[ChosenCharachter][1]);\n        //minus enemy attack, pkus chafvatwr def\n        \n        NewPlayerHealth -= (stoi(boss[2]));\n        NewPlayerHealth += (stoi(charcaters[ChosenCharachter][3]));\n     \n       charcaters[ChosenCharachter][1] = to_string(NewPlayerHealth);\n       cout<<\"Enemy did \" + to_string(((stoi(boss[2])) - (stoi(charcaters[ChosenCharachter][3]))));\n       cout<<\" damage to you!\\n\\n\";\n        \n        \n         \n     }else if(SpecialRemaing == 1){\n         \n         cout<<\"You chose to use your special! \\n\";\n         //depending on chosencharacter use the special\n         switch(ChosenCharachter){\n             \n             case 0:\n             //special-restore 30 hp to self\n             charcaters[ChosenCharachter][1] = to_string(stoi(charcaters[ChosenCharachter][1]) + 30);\n             cout<<\"You used \"+ charcaters[ChosenCharachter][4] +\" and restored 30 hp to yourself!\\n\\n\";\n             \n             \n             break;\n             \n             case 1:{\n             //special-double attack\n             int EnemyHealth = stoi(boss[1]);\n         //minus double player atk\n         EnemyHealth -= stoi(charcaters[ChosenCharachter][2]) *2;\n         \n         //plus enemy def\n         EnemyHealth += stoi(boss[3]);\n         \n         boss[1] = to_string(EnemyHealth);\n         \n             cout<<\"You used \"+ charcaters[ChosenCharachter][4] + \" and did \";\n             cout<<stoi(charcaters[ChosenCharachter][2]) - stoi(boss[3]); \n        cout<<\" double damage! \\n\\n\";\n             break;\n             }\n             \n             case 2:{\n                 int bossdef = stoi(boss[3]);\n                 bossdef -= 15;\n                 \n                 boss[3] = to_string(bossdef);\n             //lower boss def for the next move\n             cout<<\"You used \"+ charcaters[ChosenCharachter][4] +\" and lowered enemy defence!\\n\\n\";\n             break;\n             }\n             \n             case 3:\n             //do a 70 atk but lose all def\n             \n             int EnemyHealth = stoi(boss[1]);\n         //minus double player atk\n         EnemyHealth -= 70;\n         \n         //plus enemy def\n         EnemyHealth += stoi(boss[3]);\n         \n         boss[1] = to_string(EnemyHealth);\n         charcaters[ChosenCharachter][3] = to_string(0);\n             cout<<\"You used \"+ charcaters[ChosenCharachter][4] + \" and did 70 atk but lost all your def...\\n\\n\";\n             break;\n             \n         }\n         SpecialRemaing =0;\n         //enrnmy attack here\n         //enemy does damage here\n        int NewPlayerHealth = stoi(charcaters[ChosenCharachter][1]);\n        //minus enemy attack, pkus chafvatwr def\n        \n        NewPlayerHealth -= (stoi(boss[2]));\n        NewPlayerHealth += (stoi(charcaters[ChosenCharachter][3]));\n     \n       charcaters[ChosenCharachter][1] = to_string(NewPlayerHealth);\n       cout<<\"Enemy did \" + to_string(((stoi(boss[2])) - (stoi(charcaters[ChosenCharachter][3]))));\n       cout<<\" damage to you!\\n\\n\";\n     }else{\n         cout<<\"You allready used your special! \\n\\n\";\n     }"
-        }
-      ]
     }
+    
+    
 
     
     
